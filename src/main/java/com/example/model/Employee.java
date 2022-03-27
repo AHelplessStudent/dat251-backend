@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 
 import java.util.Objects;
@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+public
 class Employee {
 
     private @Id @GeneratedValue Long id;

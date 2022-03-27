@@ -1,23 +1,27 @@
 package com.example.model;
 
 
+import java.util.Collection;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Account {
 
     private @Id @GeneratedValue Long id;
-    private String username;
-    private String email;
 
-    // private List Groups
+    private String username;
+
+    private String email;
+    @ManyToMany
+    private Collection<Group> groups;
+
+    @OneToMany
+    private Collection<Expense> expenses;
+
     // private String hashed_password + salt or something
     //
-
     Account(String username, String email) {
 
         this.username = username;
@@ -34,6 +38,38 @@ public class Account {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Collection<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Collection<Group> groups) {
+        this.groups = groups;
+    }
+
+    public Collection<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(Collection<Expense> expenses) {
+        this.expenses = expenses;
     }
 
     @Override

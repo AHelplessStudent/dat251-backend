@@ -1,11 +1,10 @@
 package com.example.model;
 
 
+import java.util.Collection;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public
@@ -16,12 +15,15 @@ class Expense {
     private String title;
     private String description;
 
-    //@ManyToOne
-    //private Account owner;
+    @ManyToOne
+    private Account owner;
+
+    @ManyToOne
+    private Group group;
 
     // private List of Accounts members
-    // @OneToMany
-    // private list of Entries entries
+    @OneToMany
+    private Collection<Entry> entires;
 
     public String getTitle() {
         return title;

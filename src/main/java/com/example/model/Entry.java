@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public
@@ -16,12 +17,11 @@ class Entry {
     private String title;
     private String description;
 
-    //@ManyToOne
-    //private Account owner;
+    @ManyToOne
+    private Account owner;
 
-    // private List of Accounts members
-    // @OneToMany
-    // private list of Entries entries
+    @ManyToOne
+    private Expense expense;
 
     public String getTitle() {
         return title;

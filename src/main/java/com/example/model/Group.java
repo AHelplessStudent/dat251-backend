@@ -1,13 +1,13 @@
 package com.example.model;
 
 
+import java.util.Collection;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="groups")
 public
 class Group {
 
@@ -16,9 +16,12 @@ class Group {
     private String email;
     // private Account owner? (is this really needed?)
 
-    // private List of Accounts members
-    // private list of Expenses expenses
 
+    @ManyToMany
+    private Collection<Account> members;
+
+    @OneToMany
+    private Collection<Expense> expenses;
 
     public Long getId() {
         return this.id;

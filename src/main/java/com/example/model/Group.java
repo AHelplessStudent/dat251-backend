@@ -13,7 +13,6 @@ class Group {
 
     private @Id @GeneratedValue Long id;
     private String name;
-    private String email;
     // private Account owner? (is this really needed?)
 
 
@@ -21,7 +20,7 @@ class Group {
     private Collection<Account> members;
 
     @OneToMany
-    private Collection<Expense> expenses;
+    private Collection<Entry> expenses;
 
     public Long getId() {
         return this.id;
@@ -39,17 +38,16 @@ class Group {
         if (!(o instanceof Group))
             return false;
         Group account = (Group) o;
-        return Objects.equals(this.id, account.id) && Objects.equals(this.name, account.name)
-                && Objects.equals(this.email, account.email);
+        return Objects.equals(this.id, account.id) && Objects.equals(this.name, account.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.email);
+        return Objects.hash(this.id, this.name);
     }
 
     @Override
     public String toString() {
-        return "Employee{" + "id=" + this.id + ", username='" + this.name + '\'' + ", email='" + this.email + '\'' + '}';
+        return "Employee{" + "id=" + this.id + ", username='" + this.name + '\''  +'}';
     }
 }

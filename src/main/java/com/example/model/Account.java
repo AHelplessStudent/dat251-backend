@@ -12,13 +12,14 @@ public class Account {
     private @Id @GeneratedValue Long id;
 
     private String username;
-
     private String email;
+    private String password;
+
     @ManyToMany
     private Collection<Group> groups;
 
     @OneToMany
-    private Collection<Expense> expenses;
+    private Collection<Entry> entires;
 
     // private String hashed_password + salt or something
     //
@@ -64,12 +65,12 @@ public class Account {
         this.groups = groups;
     }
 
-    public Collection<Expense> getExpenses() {
-        return expenses;
+    public Collection<Entry> getEntires() {
+        return entires;
     }
 
-    public void setExpenses(Collection<Expense> expenses) {
-        this.expenses = expenses;
+    public void setEntires(Collection<Entry> expenses) {
+        this.entires = expenses;
     }
 
     @Override

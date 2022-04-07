@@ -12,8 +12,9 @@ public
 class Group {
 
     private @Id @GeneratedValue Long id;
+
+
     private String name;
-    // private Account owner? (is this really needed?)
 
 
     @ManyToMany
@@ -28,6 +29,15 @@ class Group {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

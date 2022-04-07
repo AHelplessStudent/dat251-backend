@@ -24,13 +24,10 @@ class AccountController {
     }
 
 
-    // Aggregate root
-    // tag::get-aggregate-root[]
     @GetMapping("/accounts")
     List<Account> all() {
         return repository.findAll();
     }
-    // end::get-aggregate-root[]
 
     @PostMapping("/accounts")
     Account newAccount(@RequestBody Account newAccount) {
@@ -61,7 +58,7 @@ class AccountController {
     }
 
     @DeleteMapping("/accounts/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    void deleteAccount(@PathVariable Long id) {
         repository.deleteById(id);
     }
 }

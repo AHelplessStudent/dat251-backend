@@ -1,9 +1,13 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.example.model.Account;
+import com.example.model.Group;
 import com.example.repository.AccountRepository;
+import com.example.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +23,12 @@ class AccountController {
     @Autowired
     private final AccountRepository repository;
 
-    AccountController(AccountRepository repository) {
+    @Autowired
+    private final GroupRepository groupRepository;
+
+    AccountController(AccountRepository repository, GroupRepository groupRepository) {
         this.repository = repository;
+        this.groupRepository = groupRepository;
     }
 
 
@@ -61,4 +69,20 @@ class AccountController {
     void deleteAccount(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+
+    // Create a group
+    @PostMapping("/accounts/{id}/group")
+    Group newGroup(@PathVariable Long id, @RequestBody Group newGroup) {
+
+        Account member = repository.findById(id).get();
+
+        member.addGroup(newGroup);
+
+        groupRepository.save(newGroup);
+        repository.save(member);
+
+        return newGroup;
+    }
+
 }

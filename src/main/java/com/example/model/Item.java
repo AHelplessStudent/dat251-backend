@@ -1,6 +1,8 @@
 package com.example.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -19,6 +21,7 @@ class Item {
     private boolean counted;
 
     @ManyToOne
+    @JsonIgnoreProperties("items")
     private Entry entry;
 
     public String getTitle() {
@@ -56,5 +59,21 @@ class Item {
     @Override
     public String toString() {
         return "Employee{" + "id=" + this.id + ", username='" + this.title + '\'' + ", email='" + this.cost + '\'' + '}';
+    }
+
+    public boolean isCounted() {
+        return counted;
+    }
+
+    public void setCounted(boolean counted) {
+        this.counted = counted;
+    }
+
+    public Entry getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Entry entry) {
+        this.entry = entry;
     }
 }

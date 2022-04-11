@@ -1,7 +1,12 @@
 package com.example.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -15,14 +20,14 @@ public class Account {
     private String email;
     private String password;
 
-    @ManyToMany
-    private Collection<Group> groups;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("members")
+    private List<Group> groups;
 
     @OneToMany
-    private Collection<Entry> entires;
+    private List<Entry> entries;
 
-    // private String hashed_password + salt or something
-    //
+
     Account(String username, String email) {
 
         this.username = username;
@@ -32,6 +37,15 @@ public class Account {
 
     public Account() {}
 
+    public void addGroup(Group group) {
+        this.groups.add(group);
+        group.getMembers().add(this);
+    }
+
+    public void removeGroup(Group group) {
+        this.groups.remove(group);
+        group.getMembers().remove(this);
+    }
 
     public Long getId() {
         return this.id;
@@ -57,20 +71,20 @@ public class Account {
         this.email = email;
     }
 
-    public Collection<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Collection<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 
-    public Collection<Entry> getEntires() {
-        return entires;
+    public List<Entry> getEntries() {
+        return entries;
     }
 
-    public void setEntires(Collection<Entry> expenses) {
-        this.entires = expenses;
+    public void setEntries(List<Entry> expenses) {
+        this.entries = expenses;
     }
 
     @Override

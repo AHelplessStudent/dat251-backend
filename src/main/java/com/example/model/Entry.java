@@ -1,6 +1,8 @@
 package com.example.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Collection;
 import java.util.Objects;
 
@@ -16,9 +18,11 @@ class Entry {
     private String date;
 
     @ManyToOne
+    @JsonIgnoreProperties("entries")
     private Account owner;
 
     @ManyToOne
+    @JsonIgnoreProperties("entries")
     private Group group;
 
     // private List of Accounts members
@@ -62,5 +66,29 @@ class Entry {
     @Override
     public String toString() {
         return "Employee{" + "id=" + this.id + ", username='" + this.title + '\'' + ", email='" + this.date + '\'' + '}';
+    }
+
+    public Account getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Account owner) {
+        this.owner = owner;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Collection<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Collection<Item> items) {
+        this.items = items;
     }
 }

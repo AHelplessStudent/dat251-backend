@@ -32,6 +32,7 @@ public class EntryController {
     @GetMapping("/entries/{id}")
     Entry one(@PathVariable Long id) { return repository.findById(id).get(); }
 
+    // TODO properly delete
     @DeleteMapping("/entries/{id}")
     void deleteGroup(@PathVariable Long id) {
         Entry entry = repository.findById(id).get();

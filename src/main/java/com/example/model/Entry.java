@@ -19,11 +19,11 @@ class Entry {
     private String date;
 
     @ManyToOne
-    @JsonIgnoreProperties("entries")
+    @JsonIgnoreProperties({"entries","groups"})
     private Account owner;
 
     @ManyToOne
-    @JsonIgnoreProperties("entries")
+    @JsonIgnoreProperties({"entries","members"})
     private Group group;
 
     // private List of Accounts members

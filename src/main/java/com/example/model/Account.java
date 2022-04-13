@@ -25,6 +25,7 @@ public class Account {
     private List<Group> groups;
 
     @OneToMany
+    @JsonIgnoreProperties("owner")
     private List<Entry> entries;
 
 
@@ -36,6 +37,16 @@ public class Account {
 
 
     public Account() {}
+
+    public void addEntry(Entry entry) {
+        this.entries.add(entry);
+        entry.setOwner(this);
+    }
+
+    public void removeEntry(Entry entry) {
+        this.entries.remove(entry);
+        entry.setOwner(null);
+    }
 
     public void addGroup(Group group) {
         this.groups.add(group);

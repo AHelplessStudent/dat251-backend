@@ -25,7 +25,8 @@ class Group {
     private List<Account> members;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Entry> expenses;
+    @JsonIgnoreProperties("group")
+    private List<Entry> entries;
 
     public Long getId() {
         return this.id;
@@ -83,7 +84,17 @@ class Group {
         this.members = members;
     }
 
-    public List<Entry> getExpenses() {
-        return expenses;
+    public List<Entry> getEntries() {
+        return entries;
+    }
+
+    public void addEntry(Entry newEntry) {
+        this.entries.add(newEntry);
+        newEntry.setGroup(this);
+    }
+
+    public void removeEntry(Entry entry) {
+        this.entries.remove(entry);
+        entry.setGroup(null);
     }
 }

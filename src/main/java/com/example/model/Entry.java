@@ -92,4 +92,14 @@ class Entry {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
+    public void addItem(Item newItem) {
+        this.items.add(newItem);
+        newItem.setEntry(this);
+    }
+
+    public void removeItem(Item item) {
+        this.items.remove(item);
+        item.setEntry(null);
+    }
 }

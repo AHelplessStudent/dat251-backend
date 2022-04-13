@@ -1,11 +1,9 @@
 package com.example.controller;
 
-import com.example.model.Account;
 import com.example.model.Entry;
-import com.example.model.Group;
 import com.example.model.Item;
 import com.example.repository.EntryRepository;
-import com.example.repository.GroupRepository;
+import com.example.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +15,12 @@ public class EntryController {
     @Autowired
     private final EntryRepository repository;
 
-    EntryController(EntryRepository repository) {
+    @Autowired
+    private final ItemRepository itemRepository;
+
+    EntryController(EntryRepository repository, ItemRepository itemRepository) {
         this.repository = repository;
+        this.itemRepository = itemRepository;
     }
 
     @GetMapping("/entries")
@@ -41,4 +43,18 @@ public class EntryController {
 
     @GetMapping("/entries/{id}/items")
     List<Item> members(@PathVariable Long id) { return repository.findById(id).get().getItems(); }
+
+    // Create/add an item to an entry
+    // velg ting i kvittering
+    @PostMapping("/entries/{id}/items")
+    Item newItem(@PathVariable Long id, @RequestBody Item newItem) {
+        Entry entry = repository.findById(id).get();
+
+        entry.addItem(newItem);
+
+        itemRepository.save(newItem);
+        repository.save(entry);
+
+        return newItem;
+    }
 }

@@ -36,4 +36,8 @@ public class ItemController {
         repository.deleteById(id);
     }
 
+    // Create/add an item to an entry
+    // velg ting i kvittering
+
+
 }

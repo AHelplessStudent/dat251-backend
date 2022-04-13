@@ -27,14 +27,14 @@ public class EntryController {
     }
 
     @PostMapping("/entries")
-    Entry newGroup(@RequestBody Entry newGroup) { return repository.save(newGroup); }
+    Entry newEntry(@RequestBody Entry newEntry) { return repository.save(newEntry); }
 
     @GetMapping("/entries/{id}")
     Entry one(@PathVariable Long id) { return repository.findById(id).get(); }
 
     // TODO properly delete
     @DeleteMapping("/entries/{id}")
-    void deleteGroup(@PathVariable Long id) {
+    void deleteEntry(@PathVariable Long id) {
         Entry entry = repository.findById(id).get();
         repository.deleteById(id);
     }

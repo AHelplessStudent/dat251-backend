@@ -30,6 +30,7 @@ public class GroupController {
     @GetMapping("/groups/{id}")
     Group one(@PathVariable Long id) { return repository.findById(id).get(); }
 
+    // TODO properly delete
     @DeleteMapping("/groups/{id}")
     void deleteGroup(@PathVariable Long id) {
         Group group = repository.findById(id).get();

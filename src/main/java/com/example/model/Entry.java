@@ -4,6 +4,7 @@ package com.example.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -18,16 +19,16 @@ class Entry {
     private String date;
 
     @ManyToOne
-    @JsonIgnoreProperties("entries")
+    @JsonIgnoreProperties({"entries","groups"})
     private Account owner;
 
     @ManyToOne
-    @JsonIgnoreProperties("entries")
+    @JsonIgnoreProperties({"entries","members"})
     private Group group;
 
     // private List of Accounts members
     @OneToMany
-    private Collection<Item> items;
+    private List<Item> items;
 
     public String getTitle() {
         return title;
@@ -84,11 +85,21 @@ class Entry {
         this.group = group;
     }
 
-    public Collection<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Collection<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public void addItem(Item newItem) {
+        this.items.add(newItem);
+        newItem.setEntry(this);
+    }
+
+    public void removeItem(Item item) {
+        this.items.remove(item);
+        item.setEntry(null);
     }
 }

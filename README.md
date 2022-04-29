@@ -6,4 +6,4 @@ spring.datasource.url
 spring.datasource.username
 spring.datasource.password
 
-with the values in notes-resources.
+with the values in notes-resources in discord.

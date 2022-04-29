@@ -112,7 +112,7 @@ class AccountController {
 
     @GetMapping("accounts/login-check")
     Long loginCheck(@RequestBody List<String> userPass) {
-        Account acc = repository.findByUsernameAndPassword(userPass.get(0), userPass.get(1));
+        Account acc = repository.findByEmailAndPassword(userPass.get(0), userPass.get(1));
         return acc.getId();
     }
 

@@ -1,4 +1,4 @@
-# Dat251 Backend
+# Dat251 Backend Group 6
 
 To connect to the heroku database change the following variables in application.properties
 

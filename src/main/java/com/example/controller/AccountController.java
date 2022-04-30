@@ -77,7 +77,7 @@ class AccountController {
 
 
     // Create a group
-    @PostMapping("/accounts/{id}/groups")
+    @PostMapping("/accounts/{id}/group")
     Group newGroup(@PathVariable Long id, @RequestBody Group newGroup) {
 
         Account member = repository.findById(id).get();

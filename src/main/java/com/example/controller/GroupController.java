@@ -2,11 +2,11 @@ package com.example.controller;
 
 import com.example.model.Account;
 import com.example.model.Group;
+import com.example.repository.AccountRepository;
 import com.example.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -15,8 +15,12 @@ public class GroupController {
     @Autowired
     private final GroupRepository repository;
 
-    GroupController(GroupRepository groupRepository) {
+    @Autowired
+    private final AccountRepository accountRepository;
+
+    GroupController(GroupRepository groupRepository, AccountRepository accountRepository) {
         this.repository = groupRepository;
+        this.accountRepository = accountRepository;
     }
 
     @GetMapping("/groups")
@@ -45,4 +49,17 @@ public class GroupController {
 
     @GetMapping("/groups/{id}/members")
     List<Account> members(@PathVariable Long id) { return repository.findById(id).get().getMembers(); }
+
+    @PostMapping("/groups/{id}/members/{mid}")
+    List<Account> addMember(@PathVariable Long id, @PathVariable Long mid) {
+        Group group = repository.findById(id).get();
+        Account acc = accountRepository.findById(mid).get();
+        group.addMember(acc);
+
+        accountRepository.save(acc);
+
+        repository.save(group);
+
+        return group.getMembers();
+    }
 }

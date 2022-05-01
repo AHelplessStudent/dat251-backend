@@ -20,7 +20,10 @@ class Group {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ElementCollection
+    private List<Float> ratios;
+
+    @ManyToMany
     @JsonIgnoreProperties("groups")
     private List<Account> members;
 
@@ -45,7 +48,6 @@ class Group {
         this.members.remove(member);
         member.getGroups().remove(this);
     }
-
 
     public String getName() {
         return name;
@@ -96,5 +98,13 @@ class Group {
     public void removeEntry(Entry entry) {
         this.entries.remove(entry);
         entry.setGroup(null);
+    }
+
+    public List<Float> getRatios() {
+        return ratios;
+    }
+
+    public void setRatios(List<Float> ratios) {
+        this.ratios = ratios;
     }
 }

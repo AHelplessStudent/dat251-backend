@@ -62,4 +62,21 @@ public class GroupController {
 
         return group.getMembers();
     }
+
+    @PostMapping("/groups/{id}/members")
+    List<Account> addMembers(@PathVariable Long id, @RequestBody List<Long> accIds) {
+
+        Group group = repository.findById(id).get();
+
+        for (Long accId : accIds) {
+            Account acc = accountRepository.findById(accId).get();
+            group.addMember(acc);
+            accountRepository.save(acc);
+        }
+
+
+        repository.save(group);
+
+        return group.getMembers();
+    }
 }

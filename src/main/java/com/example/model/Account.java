@@ -20,7 +20,7 @@ public class Account {
     private String email;
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JsonIgnoreProperties("members")
     private List<Group> groups;
 

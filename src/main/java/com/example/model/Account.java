@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -50,6 +51,7 @@ public class Account {
 
     public void addGroup(Group group) {
         this.groups.add(group);
+        group.setMembers(new ArrayList<>());
         group.getMembers().add(this);
     }
 

@@ -4,6 +4,8 @@ To connect to the heroku database change the following variables in application.
 
 spring.datasource.url  
 spring.datasource.username  
-spring.datasource.password  
+spring.datasource.password
 
 with the values in notes-resources in discord.
+
+IMPORTANT visit https://dat251-receipt-backend.herokuapp.com before using the backend.
